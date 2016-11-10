@@ -24,10 +24,12 @@ type Stacktrace struct {
 func (s *Stacktrace) Class() string { return "stacktrace" }
 
 func (s *Stacktrace) Culprit() string {
-	for i := len(s.Frames) - 1; i >= 0; i-- {
-		frame := s.Frames[i]
-		if frame.InApp == true && frame.Module != "" && frame.Function != "" {
-			return frame.Module + "." + frame.Function
+	if s != nil {
+		for i := len(s.Frames) - 1; i >= 0; i-- {
+			frame := s.Frames[i]
+			if frame.InApp == true && frame.Module != "" && frame.Function != "" {
+				return frame.Module + "." + frame.Function
+			}
 		}
 	}
 	return ""
